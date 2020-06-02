@@ -1,0 +1,19 @@
+<%- include('partials/header') %>
+<a class="btn btn-light btn-lg" href="/<%= mypurpose  %>/<%= myusername%>" role="button"> Home</a>
+<a class="btn btn-light btn-lg" href="/<%= mypurpose  %>/<%= myusername%>/chat" role="button"> Chat</a>
+<a class="btn btn-light btn-lg" href="/logout" role="button">LogOut</a>
+<h1>Select User</h1>
+<form action="/<%= mypurpose%>/<%=myusername%>/otherdesk" method="post">
+    <select class="form-control form-control-md" name ="username">
+        <% users.forEach(function(user){ %>
+            <%if(mypurpose==="admin"){ %>
+                <%if(user.purpose === "Officer" || user.purpose === "Member"){%>
+                <option value = "<%= user.username %>">Name: <%= user.name%> Username: <%=user.username%></option>
+            <%}} else { if(mypurpose==="officer"){%>
+                <%if(user.purpose === "Member"){%>
+                    <option value = "<%= user.username %>">Name: <%= user.name%> Username: <%=user.username%></option>
+        <%}}}})%> 
+  </select>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<%- include('partials/footer') %>

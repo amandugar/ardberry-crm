@@ -1,0 +1,25 @@
+<%- include('partials/header') %>
+<div class="container">
+    <h1>Update for <%=task_id%></h1>
+<form action="/<%= purpose %>/<%= username%>/task/assignedtome/updatetask/<%= task_id %>" method="POST">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Estimated Time Required</label>
+      <input type="date" class="form-control" id="exampleInputEmail1"name="estimated_time" aria-describedby="emailHelp">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Estimated Resources Required</label>
+        <input type="text" class="form-control" id="exampleInputEmail1"name="estimated_resource" aria-describedby="emailHelp">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Current Status</label>
+        <input type="text" class="form-control" id="exampleInputEmail1"name="current_status" aria-describedby="emailHelp">
+      </div>
+    
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">Remarks</label>
+        <textarea class="form-control" name="remarks" id="exampleFormControlTextarea1" rows="5"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+<%- include('partials/footer') %>

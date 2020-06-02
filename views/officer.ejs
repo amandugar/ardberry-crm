@@ -1,0 +1,16 @@
+<%- include('partials/header') %>
+
+<div class="jumbotron text-center">
+  <div class="container">
+    <i class="fas fa-key fa-6x"></i>
+    <h1 class="display-3">You've Discovered OFFICER</h1>
+    <p class="secret-text">Jack Bauer is my <%= username %>.</p>
+    <hr>
+    <a class="btn btn-light btn-lg" href="/<%= purpose %>/<%=username %>/chat" role="button">Chat</a>
+    <a class="btn btn-light btn-lg" href="/<%= purpose %>/<%=username %>/task" role="button">Task</a>
+    <a class="btn btn-light btn-lg" href="/<%= purpose %>/<%=username %>/otherdesk" role="button">See Other Desks</a>
+    <a class="btn btn-light btn-lg" href="/logout" role="button">Log Out</a>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

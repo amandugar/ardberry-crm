@@ -1,0 +1,72 @@
+<%- include('partials/header') %>
+<% if(purpose==="admin"||purpose==="officer"){ %>
+<a class="btn btn-light btn-lg" href="task/assign" role="button"> Assign Task</a>
+<a class="btn btn-light btn-lg" href="/<%= purpose  %>/<%= username%>/otherdesk" role="button"> Other Desk</a>
+<%}%>
+<% if(purpose==="member"||purpose==="officer"){ %>
+  <a class="btn btn-light btn-lg" href="task/assignedtome" role="button"> Assigned to me</a>
+<%}%>
+<a class="btn btn-light btn-lg" href="/<%= purpose  %>/<%= username%>" role="button"> Home</a>
+<a class="btn btn-light btn-lg" href="/<%= purpose  %>/<%= username%>/chat" role="button"> Chat</a>
+<a class="btn btn-light btn-lg" href="/logout" role="button">LogOut</a>
+<table class="table">
+    <thead>
+      <tr>
+            <th scope="col">Task Id</th>
+            <th scope="col">UserName</th>
+            <th scope="col">Name</th>
+            <th scope="col">Project Name</th>
+            <th scope="col">Due Date</th>
+            <th scope="col">Status</th>
+            <th scope="col">Last Update</th>
+            <th scope="col">View Full Task</th>
+            <th scope="col">Authorize</th>
+            <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% users.forEach(function(user){%>
+        <tr>
+
+            <form method="POST" action="/<%= purpose  %>/<%= username%>/task/delete/<%= user._id %> ">
+                <td><span name="aman"><%= user._id %></span></td>
+                <td ><%= user.username %></td>
+                <td><%= user.name %></td>
+                <td><%= user.project_name%></td>
+                <td><%= user.date.toString().substring(4,15)%></td>
+                <td><%= user.status%></td>
+                <td><% if(user.lastupdate){%>
+                    <%=user.lastupdate.toString().substring(4,15)%>
+                <%} else {%><p>null</p><%}%>
+                </td>
+                <td><a href="task/<%= user._id %>"><button type="button" hre class="btn btn-dark">view</button></a></td>
+                <td>        
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="status" id="exampleRadios2" value="Completed">
+                        <label class="form-check-label" for="exampleRadios2">
+                        Completed
+                        </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="status" id="exampleRadios3" value="Still Pending">
+                    <label class="form-check-label" for="exampleRadios3">
+                      Still Pending
+                    </label>
+                  </div>
+                </td>
+                <td>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="delete" id="exampleRadios2" value="Delete">
+                        <label class="form-check-label" for="exampleRadios2">
+                        Delete
+                        </label>
+                  </div>
+                </td>
+                <td><button type="submit" hre class="btn btn-dark">submit</button></td>
+            </form>
+            <% }) %>
+        </tr>
+    </tbody>
+  </table>
+
+<%- include('partials/footer') %>

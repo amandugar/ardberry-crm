@@ -1,0 +1,71 @@
+<%- include('partials/header') %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Username</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Purpose</th>
+      <th scope="col">Confirm</th>
+      <th scope="col">Submit</th>
+    </tr>
+  </thead>
+  <% var i =1; confirmuser.forEach(function(row){ %> 
+  <tbody>
+    <tr>
+      <th scope="row"><%= i++ %></th>
+      <td name = "name"><%= row.name %></td>
+      <td name ="email"><%= row.email %></td>
+      <td name = "username"><%= row.username %></td>
+      <td name = "phone"><%= row.phone %></td>
+      <form action= "/authorizeuser/<%= row.username %>" method="POST">
+        <div class="form-group">
+      <td><label for="radio">Purpose</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="purpose" id="exampleRadios1" value="Admin">
+          <label class="form-check-label" for="exampleRadios1">
+            Admin
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="purpose" id="exampleRadios2" value="Officer">
+          <label class="form-check-label" for="exampleRadios2">
+            Officer
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="purpose" id="exampleRadios3" value="Member">
+          <label class="form-check-label" for="exampleRadios3">
+            Member
+          </label>
+        </div>
+        
+      </td>
+      <td>
+        <label for="radio">Purpose</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="authorization" id="exampleRadios1" value="Approve">
+          <label class="form-check-label" for="exampleRadios1">
+            Approve
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="authorization" id="exampleRadios2" value="Reject">
+          <label class="form-check-label" for="exampleRadios2">
+            Reject
+          </label>
+        </div>
+
+      </td>
+      <td>
+        <button type="submit" class="btn btn-dark">Confirm</button>
+      </td>
+    </tr>
+  </form>
+    <% }); %>
+  </tbody>
+</table>
+<%- include('partials/footer') %>

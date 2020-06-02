@@ -1,0 +1,23 @@
+<%- include('partials/header') %>
+<div class="container">
+<h1>Task Id <%= task._id%></h1>
+<br>
+<br>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><h5>Assigned To:</h5> <%= task.username%></li>
+        <li class="list-group-item"><h5>Name: </h5> <%= task.name%></li>
+        <li class="list-group-item"><h5>Project Name:</h5> <%= task.project_name%></li>
+        <li class="list-group-item"><h5>Project Description:</h5> <%= task.project_description%></li>
+        <li class="list-group-item"><h5>Resources Detail:</h5> <%= task.resource_detail%></li>
+        <li class="list-group-item"><h5>Date:</h5> <%= task.date%></li>
+        <li class="list-group-item"><h5>Last Update Date:</h5> <%= task.lastupdate%></li>
+        <li class="list-group-item"><h5>Status:</h5> <%= task.status%></li>
+        <% var update = false; if(update.task_id==!null){update = true;} if (update){ %>
+        <li class="list-group-item"><h5>Resources Detail:</h5> <%= update.estimated_time%></li>
+        <li class="list-group-item"><h5>Date:</h5> <%= update.estimated_resource%></li>
+        <li class="list-group-item"><h5>Last Update Date:</h5> <%= update.current_status%></li>
+        <li class="list-group-item"><h5>Status:</h5> <%= update.remarks%></li> 
+        <% } %> 
+    </ul>
+</div>
+<%- include('partials/footer') %>

@@ -1,0 +1,22 @@
+<%- include('partials/header') %>
+<% chats.forEach(function(chat){%>
+    <% if(tom===chat.to){%>
+    <p style="background: blue;position:absolute ;left: 70%;text-align:right; width: 30%; margin-top: 1%"><%=chat.chat%></p>
+    <br>
+    <br>
+    <%} else {%>
+        <% if(tom === chat.from){%>
+        <p style="background: green;position:absolute ;left: 0%;text-align:left; width: 30%;margin-top:1%"><%=chat.chat%></p>
+        <br>
+        <br>
+        <% }} %> 
+<%})%>
+<form action="/<%= purpose%>/<%=from%>/chat/<%= tom %>" method="post" style="position: absolute; top: 80%;width: 100%">
+<div class="form-group" >
+    <label for="exampleInputEmail1">Chat Message</label>
+    <input type="text" class="form-control" id="exampleInputEmail1"name="chat_message" aria-describedby="emailHelp" required>
+  </div>
+  <button type="submit" class="btn btn-dark">Send</button>
+  <a class="btn btn-light btn-lg" href="/<%= purpose  %>/<%= from%>" role="button">Home</a>
+</form>
+  <%- include('partials/footer') %>

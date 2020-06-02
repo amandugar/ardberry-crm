@@ -1,0 +1,77 @@
+<%- include('partials/header') %>
+<div class="container mt-5">
+  <h1>Register</h1>
+
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="card">
+        <div class="card-body">
+
+          <!-- Makes POST request to /register route -->
+          <form action="/register" method="POST">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Name</label>
+              <input type="text" class="form-control" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text" class="form-control" name="username" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="number" class="form-control" name="phone" required maxlength="10" minlength="10"> 
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" name="password" required>
+            </div>
+            <div class="form-group">
+              <label for="password">Confirm Password</label>
+              <input type="password" class="form-control" name="confirm_password" required>
+            </div>
+            <!-- <label for="radio">Purpose</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="purpose" id="exampleRadios1" value="Admin">
+              <label class="form-check-label" for="exampleRadios1">
+                Admin
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="purpose" id="exampleRadios2" value="Officer">
+              <label class="form-check-label" for="exampleRadios2">
+                Officer
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="purpose" id="exampleRadios3" value="Member">
+              <label class="form-check-label" for="exampleRadios3">
+                Member
+              </label>
+            </div>
+          <br> -->
+            <button type="submit" class="btn btn-dark">Register</button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="col-sm-4">
+      <div class="card social-block">
+        <div class="card-body">
+          <a class="btn btn-block" href="/auth/google" role="button">
+            <i class="fab fa-google"></i>
+            Sign Up with Google
+          </a>
+        </div>
+      </div>
+    </div> -->
+
+  </div>
+</div>
+
+<%- include('partials/header') %>

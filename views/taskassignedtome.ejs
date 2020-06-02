@@ -1,0 +1,55 @@
+<%- include('partials/header') %>
+<table class="table">
+    <thead>
+      <tr>
+            <th scope="col">Task Id</th>
+            <th scope="col">UserName</th>
+            <th scope="col">assignedby</th>
+            <th scope="col">Project Name</th>
+            <th scope="col">Due Date</th>
+            <th scope="col">Status</th>
+            <th scope="col">Last Update</th>
+            <th scope="col">View Full Task</th>
+            <th scope="col">Authorize</th>
+            <th scope="col">Delete</th>
+            <th scope="col">Update</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% users.forEach(function(user){%>
+        <tr>
+
+            <form method="POST" action="/<%= purpose %>/<%= username%>/task/assignedtome/update/<%= user._id %> ">
+                <td><span name="aman"><%= user._id %></span></td>
+                <td ><%= user.username %></td>
+                <td><%= user.assignedby %></td>
+                <td><%= user.project_name%></td>
+                <td><%= user.date.toString().substring(4,15)%></td>
+                <td><%= user.status%></td>
+                <%if (user.lastupdate){%>
+                <td><%= user.lastupdate.toString().substring(4,15)%></td>
+                <%} else {%>
+                  <td>null</td>
+                  <% } %> 
+                <td><a href="/<%= purpose %>/<%= username%>/task/<%= user._id %>"><button type="button" hre class="btn btn-dark">view</button></td>
+                <td>        
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="status" id="exampleRadios2" value="Updated">
+                        <label class="form-check-label" for="exampleRadios2">
+                        Update
+                        </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="status" id="exampleRadios3" value="Completed By User">
+                    <label class="form-check-label" for="exampleRadios3">
+                      Completed
+                    </label>
+                  </div>
+                </td>
+                <td><button type="submit" hre class="btn btn-dark">submit</button></td>
+                <td><a href="/<%= purpose %>/<%= username%>/task/assignedtome/updatetask/<%= user._id %>"><button type="button" hre class="btn btn-dark">submit</button></a></td>
+            </form>
+            <% }) %>
+        </tr>
+    </tbody>
+  </table>

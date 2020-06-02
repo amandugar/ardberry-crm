@@ -1,0 +1,13 @@
+<%- include('partials/header') %>
+<h1>Select User</h1>
+<form action="/<%= mypurpose%>/<%=myusername%>/chat" method="post">
+    <select class="form-control form-control-md" name ="member">
+        <% users.forEach(function(user){ %>
+            <%if(user.username===myusername){ %>
+                <%} else {%>
+                <option value = "<%= user.username %>">Name: <%= user.name%> Username: <%=user.username%></option>
+        <%}})%> 
+  </select>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<%- include('partials/footer') %>
