@@ -129,7 +129,6 @@ app.post("/changepassword/:username",function(req,res){
     if(req.body.password === req.body.confirm_password){
       bcrypt.hash(req.body.password,saltRounds,function(err,hash){
         myhash = hash;
-        console.log(myhash)
         const userSchema = new Pending({
           username: req.params.username,
           password: hash
@@ -239,13 +238,10 @@ app.post("/authorizeuser/:username",function(req,res){
   var password = "";
    if(req.body.authorization === "Approve"){
     User.findOne({username: req.params.username},function(err,foundUser){
-      console.log("HI")
-      console.log(foundUser);
       if(foundUser){
         
         Pending.findOne({username: req.params.username},function(err,findOne){
-          password = console.log(findOne.password);
-          console.log("HI"+password);
+          password = findOne.password;
           User.updateOne({username: req.params.username},{password:password,purpose:purposeassinged},function(err){
             if (err) {
               console.log(err);
