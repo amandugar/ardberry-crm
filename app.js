@@ -273,8 +273,10 @@ app.post("/authorizeuser/:username",function(req,res){
       }
     })
     } else {
+      console.log("JI")
+      console.log(userauthenticated);
       Pending.deleteOne({username: req.params.username},function(err){});
-      res.redirect(`/${userauthenticated}/submituser`)
+      res.redirect(`/admin/${userauthenticated}/submituser`)
     }
 })
 
@@ -485,7 +487,11 @@ app.get("/:purpose/:username/chat",function(req,res){
 })
 
 app.post("/:purpose/:username/chat",function(req,res){
+  if(req.body.member ==!undefined){
   res.redirect(`/${req.params.purpose}/${req.params.username}/chat/${req.body.member}`)
+  } else{
+    res.redirect(`/${req.params.purpose}/${req.params.username}/chat`)
+  }
 })
 
 app.get("/:purpose/:username/chat/:member",function(req,res){
@@ -533,13 +539,17 @@ app.get("/:purpose/:username/otherdesk",function(req,res){
 })
 
 app.post("/:purpose/:username/otherdesk",function(req,res){
+  if(req.body.username !== undefined){
   User.findOne({username: req.body.username},function(err,foundUser){
     redirected_purpose = foundUser.purpose;
     purposeauthenticated = _.lowerCase(redirected_purpose);
     redirected_username = req.body.username;
     userauthenticated = req.body.username;
     res.redirect(`/${_.lowerCase(redirected_purpose)}/${redirected_username}`)
-  }) 
+  })
+} else {
+  res.redirect(`${req.params.purpose}/${req.params.username}/otherdesk`)
+}
 })
 
 
