@@ -18,14 +18,14 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-console.log(mongoose.connect("mongodb+srv://amandugar25:amandugar25@cluster0-3q18p.mongodb.net/test?retryWrites=true&w=majority/test", {useNewUrlParser: true,useUnifiedTopology: true}));
+mongoose.connect("mongodb+srv://amandugar25:amandugar25@cluster0-3q18p.mongodb.net/crmDB?retryWrites=true&w=majority", {useNewUrlParser: true,useUnifiedTopology: true,useCreateIndex: true});
 delay(10000);
 
 const userSchema = new mongoose.Schema ({
-  email: {type: String, unique: true},
+  email: {type: String},
   password: String,
   name: String,
-  username: {type: String, unique: true},
+  username: {type: String},
   purpose: String,
   phone: String
 });
@@ -83,7 +83,7 @@ app.post("/register", function(req, res){
       email: req.body.email,
       password: hash,
       name: req.body.name,
-      username: req.body.username,
+      username: _.lowerCase(req.body.username),
       purpose: "Not Allotted",
       phone:req.body.phone
     });
@@ -106,8 +106,6 @@ app.get("/forgotpassword",function(req,res){
 let allowchangepassword = false;
 app.post("/forgotpassword",function(req,res){
   User.findOne({email: req.body.email,phone: req.body.phone},function(err,foundUser){
-    console.log(req.body.email);
-    console.log(req.body.phone)
     if(foundUser){   
       res.redirect(`/changepassword/${foundUser.username}`)
       allowchangepassword = true;
@@ -128,7 +126,6 @@ app.get("/changepassword/:username",function(req,res){
 app.post("/changepassword/:username",function(req,res){
   if(allowchangepassword){
     let myhash = "";
-    console.log(req.body.confirm_password)
     if(req.body.password === req.body.confirm_password){
       bcrypt.hash(req.body.password,saltRounds,function(err,hash){
         myhash = hash;
@@ -247,7 +244,7 @@ app.post("/authorizeuser/:username",function(req,res){
       if(foundUser){
         
         Pending.findOne({username: req.params.username},function(err,findOne){
-          password = findOne.password;
+          password = console.log(findOne.password);
           console.log("HI"+password);
           User.updateOne({username: req.params.username},{password:password,purpose:purposeassinged},function(err){
             if (err) {
