@@ -487,8 +487,9 @@ app.get("/:purpose/:username/chat",function(req,res){
 })
 
 app.post("/:purpose/:username/chat",function(req,res){
-  if(req.body.member ==!undefined){
+  if(req.body.member !==undefined){
   res.redirect(`/${req.params.purpose}/${req.params.username}/chat/${req.body.member}`)
+  console.log("HI");
   } else{
     res.redirect(`/${req.params.purpose}/${req.params.username}/chat`)
   }
