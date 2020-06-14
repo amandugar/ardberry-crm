@@ -10,6 +10,7 @@ const saltRounds = 10;
 
 let userauthenticated;
 let array = [];
+let userverified = false;
 
 const app = express();
 
@@ -69,7 +70,11 @@ app.get("/", function(req, res){
 });
 
 app.get("/login", function(req, res){
+  if(!userverified){
   res.render("login");
+  } else if(userverified){
+    res.redirect(`/${_.lowerCase(_.lowerCase(purposeauthenticated))}/${_.lowerCase(userauthenticated)}`)
+  }
 });
 
 app.get("/register", function(req, res){
@@ -148,7 +153,6 @@ let purposeauthenticated;
 app.post("/login", function(req, res){
   const email = req.body.email;
   const password = req.body.password;
-
   User.findOne({email: email}, function(err, foundUser){
     if (err) {
       res.redirect("/login")
@@ -161,7 +165,8 @@ app.post("/login", function(req, res){
             res.redirect(`/${_.lowerCase(purpose)}/${username}`)
             userauthenticated = `${username}`;
             purposeauthenticated = _.lowerCase(`${purpose}`)
-          } else {
+            userverified =  true;
+          } else if(result=== false) {
             res.redirect("/wrongpassword");
           }
         });
@@ -553,6 +558,9 @@ app.post("/:purpose/:username/otherdesk",function(req,res){
 }
 })
 
+app.get('*',function(req,res){
+  res.render("404")
+})
 
 app.listen(3000, function() {
   console.log("Server started on port 3000.");
